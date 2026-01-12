@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>Iframe auto-escape</title>
+</head>
+<body>
+<h2>Jestem w iframe</h2>
+<p id="status">Czekam 5 sekund…</p>
+
+<script>
+    if (window.top !== window.self) {
+        setTimeout(() => {
+            document.getElementById("status").textContent =
+                "Próba wyjścia poza iframe…";
+
+            try {
+                // ❌ Chrome prawie zawsze to zablokuje
+                window.top.location.href = window.location.href;
+            } catch (e) {
+                console.error("Blocked:", e);
+                document.getElementById("status").textContent =
+                    "Zablokowane przez przeglądarkę";
+            }
+        }, 5000);
+    }
+</script>
+</body>
+</html>
