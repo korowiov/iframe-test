@@ -16,7 +16,8 @@
 
             try {
                 // ❌ Chrome prawie zawsze to zablokuje
-                window.top.location.href = window.location.href;
+                // window.top.location.href = window.location.href;
+                window.open(window.location.href, "_blank", "noopener");
             } catch (e) {
                 console.error("Blocked:", e);
                 document.getElementById("status").textContent =
